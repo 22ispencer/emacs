@@ -26,6 +26,20 @@
 
 #+END_SRC
 
+** General.el
+This is a framework for adding vim-like keybindings
+#+begin_src emacs-lisp
+  (use-package general
+    :config
+    (general-evil-setup)
+    (general-nmap
+     :prefix "SPC"
+     "q e" 'iss-edit-config
+     "q r" 'iss-reload-config
+     "q q" 'save-buffers-kill-terminal
+    ))
+#+end_src
+
 ** Evil Mode
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode)
@@ -33,6 +47,7 @@
     :init
     (setq evil-want-keybinding nil)
     (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-u-delete t)
     :config
     (evil-mode 1))
   (use-package evil-collection
@@ -46,33 +61,59 @@
 
 ** Config Commands
 #+begin_src emacs-lisp
-  (defun reload-config ()
+  (defun iss-reload-config ()
     (interactive)
     (load user-init-file))
-  (defun edit-config ()
+  (defun iss-edit-config ()
     (interactive)
     (find-file (file-name-concat (file-name-directory user-init-file) "init.org")))
 #+end_src
 
+* General config
 
-* Graphic Settings
+** Useful
+#+begin_src emacs-lisp
+  (add-to-list 'safe-local-variable-values '(eval add-hook 'after-save-hook (lambda nil (org-babel-tangle)) nil t))
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
 
-** Font
+** Graphic Settings
+
+*** Font
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil :font "Monaspace Argon" :height 200)
 #+end_src
 
-** Theme
+*** Theme
 #+begin_src emacs-lisp
   (use-package doom-themes
     :config
     (load-theme 'doom-monokai-pro t))
 #+end_src
 
+* Languages
+
+** Org-mode
+#+begin_src emacs-lisp
+  (use-package org
+    :straight nil
+    :general
+    (:states 'normal
+  	     :prefix ","
+  	     ", s" 'iss-insert-src-block
+  	     )
+    :preface
+    (defun iss-insert-src-block ()
+      (interactive)
+      (org-insert-structure-template "src")))
+#+end_src
+
 
 * Magit
 #+begin_src emacs-lisp
-  (use-package magit)
+  (use-package magit
+    :general
+    (:states 'normal "SPC g" 'magit))
 #+end_src
 
 * Local Variables
