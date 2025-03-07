@@ -1,0 +1,81 @@
+#+PROPERTY: header-args :comments org :tangle init.el
+
+* Essentials
+
+** Setup Straight.el
+#+BEGIN_SRC emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name
+          "straight/repos/straight.el/bootstrap.el"
+          (or (bound-and-true-p straight-base-dir)
+              user-emacs-directory)))
+        (bootstrap-version 7))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+  (setq package-enable-at-startup nil)
+
+  (setq straight-use-package-by-default t)
+  (straight-use-package 'use-package)
+
+#+END_SRC
+
+** Evil Mode
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode)
+  (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    :config
+    (evil-mode 1))
+  (use-package evil-collection
+    :after (evil)
+    :config
+    (evil-collection-init))
+  (use-package inhibit-mouse
+    :config
+    (inhibit-mouse-mode))
+#+end_src
+
+** Config Commands
+#+begin_src emacs-lisp
+  (defun reload-config ()
+    (interactive)
+    (load user-init-file))
+  (defun edit-config ()
+    (interactive)
+    (find-file (file-name-concat (file-name-directory user-init-file) "init.org")))
+#+end_src
+
+
+* Graphic Settings
+
+** Font
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil :font "Monaspace Argon" :height 200)
+#+end_src
+
+** Theme
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :config
+    (load-theme 'doom-monokai-pro t))
+#+end_src
+
+
+* Magit
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
+
+* Local Variables
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+# End:
