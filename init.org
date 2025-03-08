@@ -58,6 +58,16 @@ This is a framework for adding vim-like keybindings
     :after (evil)
     :config
     (evil-collection-init))
+  (use-package evil-surround
+    :config
+    (global-evil-surround-mode 1))
+  (use-package evil-snipe
+    :custom
+    (evil-snipe-scope 'buffer)
+    (evil-snipe-repeat-scope 'whole-buffer)
+    :config
+    (evil-snipe-mode +1)
+    (evil-snipe-override-mode +1))
   (use-package inhibit-mouse
     :config
     (inhibit-mouse-mode))
