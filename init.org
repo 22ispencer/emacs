@@ -129,6 +129,27 @@ This is a framework for adding vim-like keybindings
     (load-theme 'doom-monokai-pro t))
 #+end_src
 
+*** Modeline
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :init (doom-modeline-mode 1))
+#+end_src
+
+*** Dashboard
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :custom
+    (dashboard-center-content t)
+    (dashboard-vertically-center-content t)
+    (dashboard-startup-banner 'logo)
+    (dashboard-projects-backend 'project-el)
+    (dashboard-items '((recents  . 5)
+  		     (projects . 5)
+  		     (agenda   . 5)))
+    :init
+    (dashboard-setup-startup-hook))
+#+end_src
+
 * Languages
 
 ** Eglot
