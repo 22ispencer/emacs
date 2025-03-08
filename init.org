@@ -54,6 +54,7 @@ This is a framework for adding vim-like keybindings
   (use-package evil-collection
     :custom
     (evil-collection-setup-minibuffer t)
+    (evil-undo-system 'undo-redo)
     :after (evil)
     :config
     (evil-collection-init))
@@ -105,18 +106,18 @@ This is a framework for adding vim-like keybindings
     (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
     ;; Enable all Cascadia Code ligatures in programming modes
     (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-					 ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-					 "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-					 "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-					 "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-					 "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-					 "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-					 "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-					 ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-					 "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-					 "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-					 "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-					 "\\\\" "://"))
+  					 ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+  					 "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+  					 "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+  					 "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+  					 "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+  					 "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+  					 "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+  					 ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+  					 "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+  					 "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+  					 "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+  					 "\\\\" "://"))
     ;; Enables ligature checks globally in all buffers. You can also do it
     ;; per mode with `ligature-mode'.
     (global-ligature-mode t))
@@ -162,13 +163,7 @@ This is a framework for adding vim-like keybindings
     :straight nil
     :general
     (:states 'normal
-  	     :prefix ","
-  	     ", s" 'iss-insert-src-block
-  	     )
-    :preface
-    (defun iss-insert-src-block ()
-      (interactive)
-      (org-insert-structure-template "src")))
+  	     ", ," 'org-insert-structure-template))
 #+end_src
 
 *** Babel 
