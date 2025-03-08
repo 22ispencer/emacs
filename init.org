@@ -43,6 +43,7 @@ This is a framework for adding vim-like keybindings
 ** Evil Mode
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode)
+  (setq display-line-numbers-type 'relative)
   (use-package evil
     :init
     (setq evil-want-keybinding nil)
@@ -51,6 +52,8 @@ This is a framework for adding vim-like keybindings
     :config
     (evil-mode 1))
   (use-package evil-collection
+    :custom
+    (evil-collection-setup-minibuffer t)
     :after (evil)
     :config
     (evil-collection-init))
@@ -75,6 +78,16 @@ This is a framework for adding vim-like keybindings
 #+begin_src emacs-lisp
   (add-to-list 'safe-local-variable-values '(eval add-hook 'after-save-hook (lambda nil (org-babel-tangle)) nil t))
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+  (use-package emacs
+    :custom
+    (tool-bar-mode nil)
+    (enable-recursive-minibuffers t)
+    (tab-always-indent 'complete)
+    (text-mode-ispell-word-completion nil)
+    (read-extended-command-predicate #'command-completion-default-include-p)
+    (minibuffer-prompt-properties
+     '(read-only t cursor-intangible t face minibuffer-prompt)))
 #+end_src
 
 ** Graphic Settings
@@ -118,6 +131,10 @@ This is a framework for adding vim-like keybindings
 
 * Languages
 
+** Eglot
+#+begin_src emacs-lisp
+#+end_src
+
 ** Org-mode
 #+begin_src emacs-lisp
   (use-package org
@@ -133,8 +150,69 @@ This is a framework for adding vim-like keybindings
       (org-insert-structure-template "src")))
 #+end_src
 
+*** Babel 
+#+begin_src emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)))
+  (setq org-confirm-babel-evaluate nil)
+  (setq python-indent-guess-indent-offset-verbose nil)
+#+end_src
 
-* Magit
+** Zig
+#+begin_src emacs-lisp
+  (use-package zig-mode
+    :hook eglot)
+#+end_src
+
+* Dev Tools
+
+** Completion
+
+*** Orderless
+#+begin_src emacs-lisp
+  (use-package orderless
+    :custom
+    (completion-styles '(orderless basic))
+    (completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+
+*** In-Buffer Completion
+#+begin_src emacs-lisp
+  (use-package corfu
+    :after emacs
+    :custom
+    (corfu-auto t)
+    (corfu-quit-no-match 'separator)
+    :general
+    (:states 'insert
+             "C-n" #'corfu-next
+             "C-p" #'corfu-previous
+             ;"<escape>" #'corfu-quit
+             "C-SPC" #'corfu-insert
+             "M-d" #'corfu-show-documentation
+             "M-l" #'corfu-show-location)
+    :init
+    (global-corfu-mode))
+#+end_src
+
+*** Minibuffer Completion
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init
+    (vertico-mode))
+
+  (use-package savehist
+    :init
+    (savehist-mode))
+#+end_src
+
+** Formatting
+#+begin_src emacs-lisp
+  (use-package reformatter)
+#+end_src
+
+** Magit
 #+begin_src emacs-lisp
   (use-package magit
     :general
