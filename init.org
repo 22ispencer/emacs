@@ -163,6 +163,11 @@ This is a framework for adding vim-like keybindings
 
 * Languages
 
+** Clojure
+#+begin_src emacs-lisp
+  (use-package clojure-mode)
+#+end_src
+
 ** Eglot
 #+begin_src emacs-lisp
 #+end_src
@@ -183,12 +188,6 @@ This is a framework for adding vim-like keybindings
    '((python . t)))
   (setq org-confirm-babel-evaluate nil)
   (setq python-indent-guess-indent-offset-verbose nil)
-#+end_src
-
-** Zig
-#+begin_src emacs-lisp
-  (use-package zig-mode
-    :hook eglot)
 #+end_src
 
 ** Python
@@ -228,6 +227,20 @@ This is a framework for adding vim-like keybindings
             (message "Activated UV Python environment at %s" venv-path))
         (error "No UV Python environment found in %s" project-root))))
 #+end_src
+
+** Common Lisp
+#+begin_src emacs-lisp
+  (use-package slime
+    :custom
+    (inferior-lisp-program "sbcl"))
+#+end_src
+
+** Zig
+#+begin_src emacs-lisp
+  (use-package zig-mode
+    :hook eglot)
+#+end_src
+
 
 * Dev Tools
 
