@@ -73,6 +73,13 @@ This is a framework for adding vim-like keybindings
     (inhibit-mouse-mode))
 #+end_src
 
+** Merge Shell $PATH
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :init
+    (exec-path-from-shell-initialize))
+#+end_src
+
 ** Config Commands
 #+begin_src emacs-lisp
   (defun iss-reload-config ()
@@ -153,10 +160,12 @@ This is a framework for adding vim-like keybindings
     (dashboard-center-content t)
     (dashboard-vertically-center-content t)
     (dashboard-startup-banner 'logo)
+    (dashboard-display-icons-p t)    
+    (dashboard-icon-type 'nerd-icons) 
     (dashboard-projects-backend 'project-el)
     (dashboard-items '((recents  . 5)
-  		     (projects . 5)
-  		     (agenda   . 5)))
+		     (projects . 5)
+		     (agenda   . 5)))
     :init
     (dashboard-setup-startup-hook))
 #+end_src
@@ -230,9 +239,8 @@ This is a framework for adding vim-like keybindings
 
 ** Common Lisp
 #+begin_src emacs-lisp
-  (use-package slime
-    :custom
-    (inferior-lisp-program "sbcl"))
+  (setq inferior-lisp-program (executable-find "sbcl"))
+  (use-package slime)
 #+end_src
 
 ** Zig
@@ -244,12 +252,6 @@ This is a framework for adding vim-like keybindings
 
 * Dev Tools
 
-** Eshell
-#+begin_src emacs-lisp
-  (use-package exec-path-from-shell
-    :init
-    (exec-path-from-shell-initialize))
-#+end_src
 
 ** Completion
 
