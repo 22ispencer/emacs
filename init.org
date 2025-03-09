@@ -258,6 +258,7 @@ This is a framework for adding vim-like keybindings
 ** Common Lisp
 #+begin_src emacs-lisp
   (setq inferior-lisp-program (executable-find "sbcl"))
+  (setq slime-contribs '(slime-asdf))
   (use-package slime)
 #+end_src
 
