@@ -184,10 +184,10 @@ This is a framework for adding vim-like keybindings
 ** Org-mode
 #+begin_src emacs-lisp
   (use-package org
-    :straight nil
     :general
     (:states 'normal
-  	     ", ," 'org-insert-structure-template))
+  	   ", ," 'org-insert-structure-template
+  	   "RET" 'org-open-at-point))
 #+end_src
 
 *** Babel 
@@ -197,6 +197,19 @@ This is a framework for adding vim-like keybindings
    '((python . t)))
   (setq org-confirm-babel-evaluate nil)
   (setq python-indent-guess-indent-offset-verbose nil)
+#+end_src
+
+*** Roam
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :general
+    (:states 'normal
+  	   :prefix "SPC r"
+  	   "c" 'org-roam-capture
+  	   "i" 'org-roam-node-insert
+  	   "f" 'org-roam-node-find)
+    :config
+    (org-roam-db-autosync-mode))
 #+end_src
 
 ** Python
