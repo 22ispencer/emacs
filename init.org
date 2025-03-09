@@ -323,6 +323,11 @@ This is a framework for adding vim-like keybindings
     (:states 'normal "SPC g" 'magit))
 #+end_src
 
+** Dirvish
+#+begin_src emacs-lisp
+  (use-package dirvish)
+#+end_src
+
 ** Vterm
 #+begin_src emacs-lisp
   (use-package vterm)
