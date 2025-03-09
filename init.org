@@ -184,10 +184,15 @@ This is a framework for adding vim-like keybindings
 ** Org-mode
 #+begin_src emacs-lisp
   (use-package org
+    :custom
+    (org-hide-emphasis-markers t)
     :general
     (:states 'normal
+  	   :keymaps 'org-mode-map
   	   ", ," 'org-insert-structure-template
   	   "RET" 'org-open-at-point))
+  (use-package org-bullets
+    :after org)
 #+end_src
 
 *** Babel 
