@@ -100,10 +100,16 @@ This is a framework for adding vim-like keybindings
 
   (setq calc-float-format '(eng 5))
   (use-package emacs
+    :hook (prog-mode . electric-pair-mode)
     :custom
+    ;; select help window when opening
+    (help-window-select t)
+    ;; Hide the toolbar
     (tool-bar-mode nil)
+    ;; for vertico
     (enable-recursive-minibuffers t)
     (tab-always-indent 'complete)
+    ;; disable spelling completion
     (text-mode-ispell-word-completion nil)
     (read-extended-command-predicate #'command-completion-default-include-p)
     (minibuffer-prompt-properties
