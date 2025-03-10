@@ -188,6 +188,7 @@ This is a framework for adding vim-like keybindings
   (use-package org
     :custom
     (org-hide-emphasis-markers t)
+    (org-startup-indented t)
     :general
     (:states 'normal
   	   :keymaps 'org-mode-map
