@@ -45,10 +45,11 @@ This is a framework for adding vim-like keybindings
   (global-display-line-numbers-mode)
   (setq display-line-numbers-type 'relative)
   (use-package evil
-    :init
-    (setq evil-want-keybinding nil)
-    (setq evil-want-C-u-scroll t)
-    (setq evil-want-C-u-delete t)
+    :custom
+    (evil-want-keybinding nil)
+    (evil-want-C-u-scroll t)
+    (evil-want-C-u-delete t)
+    (evil-want-Y-yank-to-eol t)
     :config
     (evil-mode 1))
   (use-package evil-collection
