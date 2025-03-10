@@ -188,6 +188,13 @@ This is a framework for adding vim-like keybindings
   (use-package clojure-mode)
 #+end_src
 
+** Common Lisp
+#+begin_src emacs-lisp
+  (setq inferior-lisp-program (executable-find "sbcl"))
+  (setq slime-contribs '(slime-asdf))
+  (use-package slime)
+#+end_src
+
 ** Eglot
 #+begin_src emacs-lisp
 #+end_src
@@ -267,11 +274,9 @@ This is a framework for adding vim-like keybindings
         (error "No UV Python environment found in %s" project-root))))
 #+end_src
 
-** Common Lisp
+** Racket
 #+begin_src emacs-lisp
-  (setq inferior-lisp-program (executable-find "sbcl"))
-  (setq slime-contribs '(slime-asdf))
-  (use-package slime)
+  (use-package racket-mode)
 #+end_src
 
 ** Zig
