@@ -155,6 +155,11 @@ This is a framework for adding vim-like keybindings
 
 *** Modeline
 #+begin_src emacs-lisp
+  (straight-register-package
+   '(shrink-path
+     :type git
+     :host github
+     :repo "emacsmirror/shrink-path"))
   (use-package doom-modeline
     :init (doom-modeline-mode 1))
 #+end_src
