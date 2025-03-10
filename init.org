@@ -114,7 +114,11 @@ This is a framework for adding vim-like keybindings
 
 *** Font
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :font "Monaspace Argon" :height 170)
+  (let ((font-size (let ((hostname (system-name)))
+  		   (cond ((equal hostname "JBRA-D1837") 230)
+  			 (t 170)))))
+    (set-face-attribute 'default nil :font "Monaspace Argon" :height font-size))
+
   ;; This assumes you've installed the package via MELPA.
   (use-package ligature
     :config
