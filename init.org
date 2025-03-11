@@ -378,7 +378,13 @@ This is a framework for adding vim-like keybindings
 
 ** Dirvish
 #+begin_src emacs-lisp
-  (use-package dirvish)
+  (use-package dirvish
+    :general
+    (:states 'normal
+  	   :keymaps 'dirvish-mode-map
+  	   "_" 'dired-create-empty-file)
+    :config
+    (dirvish-override-dired-mode))
 #+end_src
 
 ** Vterm
