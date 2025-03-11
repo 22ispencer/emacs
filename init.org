@@ -26,6 +26,13 @@
 
 #+END_SRC
 
+** Merge Shell $PATH
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :init
+    (exec-path-from-shell-initialize))
+#+end_src
+
 ** General.el
 This is a framework for adding vim-like keybindings
 #+begin_src emacs-lisp
@@ -69,16 +76,9 @@ This is a framework for adding vim-like keybindings
     :config
     (evil-snipe-mode +1)
     (evil-snipe-override-mode +1))
-  (use-package inhibit-mouse
-    :config
-    (inhibit-mouse-mode))
-#+end_src
-
-** Merge Shell $PATH
-#+begin_src emacs-lisp
-  (use-package exec-path-from-shell
-    :init
-    (exec-path-from-shell-initialize))
+  ;(use-package inhibit-mouse
+  ;  :config
+  ;  (inhibit-mouse-mode))
 #+end_src
 
 ** Config Commands
