@@ -324,6 +324,29 @@ This is a framework for adding vim-like keybindings
 
 * Dev Tools
 
+** Popper
+
+for simple popup buffers
+
+#+begin_src emacs-lisp
+  (use-package popper
+    :custom
+    (popper-reference-buffers
+     '("\\*Messages\\*"
+       "Output\\*$"
+       "\\*Async Shell Command\\*"
+       help-mode
+       compilation-mode
+       "^\\*vterm.*\\*$" vterm-mode))
+    (popper-group-function #'popper-group-by-directory)
+    :bind (("C-`"   . popper-toggle)
+           ("M-`"   . popper-cycle)
+           ("C-M-`" . popper-toggle-type))
+    :init
+    (popper-mode +1)
+    (popper-echo-mode +1))                ; For echo area hints
+#+end_src
+
 ** Completion
 
 *** Orderless
