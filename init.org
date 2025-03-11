@@ -218,6 +218,12 @@ This is a framework for adding vim-like keybindings
 #+begin_src emacs-lisp
 #+end_src
 
+** Janet
+#+begin_src emacs-lisp
+  (use-package janet-mode
+    :straight t)
+#+end_src
+
 ** Latex
 #+begin_src emacs-lisp
   (use-package auctex
@@ -317,7 +323,6 @@ This is a framework for adding vim-like keybindings
 
 
 * Dev Tools
-
 
 ** Completion
 
