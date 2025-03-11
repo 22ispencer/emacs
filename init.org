@@ -189,6 +189,19 @@ This is a framework for adding vim-like keybindings
 
 * Languages
 
+** General
+#+begin_src emacs-lisp
+  (use-package treesit
+    :straight nil)
+
+  (use-package treesit-auto
+    :custom
+    (treesit-auto-install 'prompt)
+    :config
+    (treesit-auto-add-to-auto-mode-alist 'all)
+    (global-treesit-auto-mode))
+#+end_src
+
 ** Clojure
 #+begin_src emacs-lisp
   (use-package clojure-mode)
